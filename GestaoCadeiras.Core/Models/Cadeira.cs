@@ -4,7 +4,7 @@ namespace GestaoCadeiras.Core.Models
 {
     public class Cadeira 
     {
-        public Cadeira(Guid cadeiraId, int numero, string descricao, bool ativo)
+        public Cadeira(int cadeiraId, int numero, string descricao, bool ativo) 
         {
             Id = cadeiraId;
             Numero = numero;
@@ -12,15 +12,14 @@ namespace GestaoCadeiras.Core.Models
             Ativo = ativo;
         }
 
-        protected Cadeira() { }
+        public Cadeira() { }
 
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public int Numero { get; set; }
 
         public string Descricao { get; set; } = string.Empty;
-        public bool Ativo { get; set; }
-        public virtual Agenda? Agenda { get; set; }
+        public bool Ativo { get; set; }        
     }
 }

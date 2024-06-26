@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GestaoCadeiras.API.Data;
 using GestaoCadeiras.Core.Models;
+using Microsoft.Extensions.Configuration;
+using GestaoCadeiras.Core.Handlers;
+using GestaoCadeiras.Core.Requests.Cadeira;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace GestaoCadeiras.API.Controllers
 {
@@ -26,11 +30,11 @@ namespace GestaoCadeiras.API.Controllers
         public async Task<ActionResult<IEnumerable<Cadeira>>> GetCadeiras()
         {
             return await _context.Cadeiras.ToListAsync();
-        }
+        }        
 
         // GET: api/Cadeiras/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cadeira>> GetCadeira(Guid id)
+        public async Task<ActionResult<Cadeira>> GetCadeira(int id)
         {
             var cadeira = await _context.Cadeiras.FindAsync(id);
 
@@ -45,7 +49,7 @@ namespace GestaoCadeiras.API.Controllers
         // PUT: api/Cadeiras/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCadeira(Guid id, Cadeira cadeira)
+        public async Task<IActionResult> PutCadeira(int id, Cadeira cadeira)
         {
             if (id != cadeira.Id)
             {
@@ -73,8 +77,7 @@ namespace GestaoCadeiras.API.Controllers
             return NoContent();
         }
 
-        // POST: api/Cadeiras
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/Cadeiras        
         [HttpPost]
         public async Task<ActionResult<Cadeira>> PostCadeira(Cadeira cadeira)
         {
@@ -100,7 +103,7 @@ namespace GestaoCadeiras.API.Controllers
             return NoContent();
         }
 
-        private bool CadeiraExists(Guid id)
+        private bool CadeiraExists(int id)
         {
             return _context.Cadeiras.Any(e => e.Id == id);
         }

@@ -5,7 +5,7 @@ namespace GestaoCadeiras.Core.Models
 {
     public class Agenda 
     {
-        public Agenda(Guid agendaId, Guid cadeiraId, DateOnly data, TimeOnly horaInicio, TimeOnly horaFim)
+        public Agenda(int agendaId, int cadeiraId, DateOnly data, TimeOnly horaInicio, TimeOnly horaFim)
         {
             Id = agendaId;
             CadeiraId = cadeiraId;
@@ -14,11 +14,11 @@ namespace GestaoCadeiras.Core.Models
             HoraFim = horaFim;
         }
 
-        protected Agenda() { }
+        public Agenda() { }
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
-        public Guid CadeiraId { get; set; }
+        public int CadeiraId { get; set; }
 
         public DateOnly Data { get; set; }
 

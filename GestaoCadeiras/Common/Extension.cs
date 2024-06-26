@@ -1,4 +1,6 @@
 ﻿using GestaoCadeiras.API.Data;
+using GestaoCadeiras.API.Handlers;
+using GestaoCadeiras.Core.Handlers;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestaoCadeiras.API.Common
@@ -18,6 +20,17 @@ namespace GestaoCadeiras.API.Common
             {
                     x.UseMySql(Configuration.ConnectionString, ServerVersion.AutoDetect(Configuration.ConnectionString));
                 });
+        }
+
+        public static void AddServices(this WebApplicationBuilder builder)
+        {
+            builder
+                .Services
+                .AddTransient<ICadeiraHandler, CadeiraHandler>();
+
+            //builder
+            //    .Services
+            //    .AddTransient<IAgendaHandler, AgendaHandler>();
         }
     }
 }

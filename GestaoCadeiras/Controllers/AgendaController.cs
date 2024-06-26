@@ -43,9 +43,9 @@ namespace GestaoCadeiras.API.Controllers
         }
 
         // PUT: api/Agenda/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAgenda(Guid id, Agenda agenda)
+        public async Task<IActionResult> PutAgenda(int id, Agenda agenda)
         {
             if (id != agenda.Id)
             {
@@ -73,8 +73,7 @@ namespace GestaoCadeiras.API.Controllers
             return NoContent();
         }
 
-        // POST: api/Agenda
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/Agenda        
         [HttpPost]
         public async Task<ActionResult<Agenda>> PostAgenda(Agenda agenda)
         {
@@ -100,7 +99,7 @@ namespace GestaoCadeiras.API.Controllers
             return NoContent();
         }
 
-        private bool AgendaExists(Guid id)
+        private bool AgendaExists(int id)
         {
             return _context.Agendas.Any(e => e.Id == id);
         }

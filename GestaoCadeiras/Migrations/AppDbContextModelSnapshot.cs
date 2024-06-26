@@ -24,12 +24,14 @@ namespace GestaoCadeiras.API.Migrations
 
             modelBuilder.Entity("GestaoCadeiras.Core.Models.Agenda", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("CadeiraId")
-                        .HasColumnType("char(36)");
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CadeiraId")
+                        .HasColumnType("int");
 
                     b.Property<DateOnly>("Data")
                         .HasColumnType("date");
@@ -42,17 +44,18 @@ namespace GestaoCadeiras.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CadeiraId")
-                        .IsUnique();
+                    b.HasIndex("CadeiraId");
 
                     b.ToTable("Agendas");
                 });
 
             modelBuilder.Entity("GestaoCadeiras.Core.Models.Cadeira", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("tinyint(1)");
@@ -72,17 +75,12 @@ namespace GestaoCadeiras.API.Migrations
             modelBuilder.Entity("GestaoCadeiras.Core.Models.Agenda", b =>
                 {
                     b.HasOne("GestaoCadeiras.Core.Models.Cadeira", "Cadeira")
-                        .WithOne("Agenda")
-                        .HasForeignKey("GestaoCadeiras.Core.Models.Agenda", "CadeiraId")
+                        .WithMany()
+                        .HasForeignKey("CadeiraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cadeira");
-                });
-
-            modelBuilder.Entity("GestaoCadeiras.Core.Models.Cadeira", b =>
-                {
-                    b.Navigation("Agenda");
                 });
 #pragma warning restore 612, 618
         }
