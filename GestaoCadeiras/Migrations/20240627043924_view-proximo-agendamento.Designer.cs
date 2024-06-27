@@ -4,6 +4,7 @@ using GestaoCadeiras.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoCadeiras.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240627043924_view-proximo-agendamento")]
+    partial class viewproximoagendamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,18 +73,6 @@ namespace GestaoCadeiras.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cadeiras");
-                });
-
-            modelBuilder.Entity("GestaoCadeiras.Core.Models.ProximoAgendamento", b =>
-                {
-                    b.Property<int>("CadeiraId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CadeiraId");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("proximoagendamento", (string)null);
                 });
 
             modelBuilder.Entity("GestaoCadeiras.Core.Models.Agenda", b =>

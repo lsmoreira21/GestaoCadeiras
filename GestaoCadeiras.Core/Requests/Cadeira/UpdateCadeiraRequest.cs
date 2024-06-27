@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace GestaoCadeiras.Core.Requests.Cadeira
 {
     public class UpdateCadeiraRequest : Request
     {
-        [Required(ErrorMessage = "Id inválido")]
+        [JsonIgnore]
         public long Id { get; set; }
 
         [Required(ErrorMessage = "Descrição inválido")]

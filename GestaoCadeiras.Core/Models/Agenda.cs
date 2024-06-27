@@ -1,11 +1,12 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace GestaoCadeiras.Core.Models
 {
     public class Agenda 
     {
-        public Agenda(int agendaId, int cadeiraId, DateOnly data, TimeOnly horaInicio, TimeOnly horaFim)
+        public Agenda(int agendaId, int cadeiraId, DateTime data, TimeOnly horaInicio, TimeOnly horaFim)
         {
             Id = agendaId;
             CadeiraId = cadeiraId;
@@ -20,12 +21,13 @@ namespace GestaoCadeiras.Core.Models
 
         public int CadeiraId { get; set; }
 
-        public DateOnly Data { get; set; }
+        public DateTime Data { get; set; }
 
         public TimeOnly HoraInicio { get; set; }
 
         public TimeOnly HoraFim { get; set; }
 
+        [JsonIgnore]
         public virtual Cadeira? Cadeira { get; set; }
     }
 }

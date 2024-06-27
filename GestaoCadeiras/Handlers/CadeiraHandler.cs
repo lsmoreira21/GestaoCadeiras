@@ -23,11 +23,11 @@ namespace GestaoCadeiras.API.Handlers
                 context.Cadeiras.Add(cadeira);
                 await context.SaveChangesAsync();
 
-                return new Response<Cadeira?>(cadeira, "Cadeira criada com sucesso");
+                return new Response<Cadeira?>(cadeira,201, "Cadeira criada com sucesso");
             }
             catch (Exception e)
             {
-                return new Response<Cadeira?>(null, "Não foi possível criar a cadeira");
+                return new Response<Cadeira?>(null,500, "Não foi possível criar a cadeira");
             }
         }
 
@@ -40,16 +40,16 @@ namespace GestaoCadeiras.API.Handlers
                     .FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 if (cadeira is null)
-                    return new Response<Cadeira?>(null, "Cadeira não encontrada");
+                    return new Response<Cadeira?>(null,404, "Cadeira não encontrada");
 
                 context.Cadeiras.Remove(cadeira);
                 await context.SaveChangesAsync();
 
-                return new Response<Cadeira?>(cadeira, "Cadeira excluída com sucesso");
+                return new Response<Cadeira?>(cadeira,200, "Cadeira excluída com sucesso");
             }
             catch (Exception e)
             {
-                return new Response<Cadeira?>(null, "Não foi possível excluir a cadeira");
+                return new Response<Cadeira?>(null,500, "Não foi possível excluir a cadeira");
             }
         }
 
@@ -64,8 +64,8 @@ namespace GestaoCadeiras.API.Handlers
                 .ToListAsync();             
 
             return cadeiras is null
-                ? new Response<List<Cadeira>>(null, "Não existe cadeira cadastrada")
-                : new Response<List<Cadeira>>(cadeiras);
+                ? new Response<List<Cadeira>>(null,404, "Não existe cadeira cadastrada")
+                : new Response<List<Cadeira>>(cadeiras, 200, "Consulta realizada com sucesso");
         }
 
         async Task<Response<Cadeira?>> ICadeiraHandler.GetByIdAsysc(GetCadeiraByIdRequest request)
@@ -78,12 +78,12 @@ namespace GestaoCadeiras.API.Handlers
                     .FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 return cadeira is null
-                    ? new Response<Cadeira?>(null, "Cadeira não encontrada")
-                    : new Response<Cadeira?>(cadeira);
+                    ? new Response<Cadeira?>(null, 404, "Cadeira não encontrada")
+                    : new Response<Cadeira?>(cadeira, 200, "Consulta realizada com sucesso");
             }
             catch (Exception e)
             {
-                return new Response<Cadeira?>(null, "Não foi possível buscar a cadeira");
+                return new Response<Cadeira?>(null, 500, "Não foi possível buscar a cadeira");
             }
         }
 
@@ -96,7 +96,7 @@ namespace GestaoCadeiras.API.Handlers
                     .FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 if (cadeira is null)
-                    return new Response<Cadeira?>(null, "Cadeira não encontrada");
+                    return new Response<Cadeira?>(null, 404, "Cadeira não encontrada");
 
                 cadeira.Descricao = request.Descricao;
                 cadeira.Numero = request.Numero;
@@ -105,11 +105,11 @@ namespace GestaoCadeiras.API.Handlers
                 context.Cadeiras.Update(cadeira);
                 await context.SaveChangesAsync();
 
-                return new Response<Cadeira?>(cadeira, "Cadeira atualizada com sucesso");
+                return new Response<Cadeira?>(cadeira, 200, "Cadeira atualizada com sucesso");
             }
             catch (Exception e)
             {
-                return new Response<Cadeira?>(null, "Não foi possível alterar a cadeira");
+                return new Response<Cadeira?>(null, 500, "Não foi possível alterar a cadeira");
             }
         }
     }

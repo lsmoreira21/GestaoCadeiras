@@ -28,9 +28,18 @@ namespace GestaoCadeiras.API.Common
                 .Services
                 .AddTransient<ICadeiraHandler, CadeiraHandler>();
 
-            //builder
-            //    .Services
-            //    .AddTransient<IAgendaHandler, AgendaHandler>();
+            builder
+                .Services
+                .AddTransient<IAgendaHandler, AgendaHandler>();
+        }
+
+        public static void AddDocumentation(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen(x =>
+            {
+                x.CustomSchemaIds(n => n.FullName);
+            });
         }
     }
 }
